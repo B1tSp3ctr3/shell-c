@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 int main() {
   // Flush after every printf
   setbuf(stdout, NULL);
@@ -8,8 +9,8 @@ int main() {
   while(1){	
 	  printf("$ ");
 	  fgets(input, 100, stdin);
-	  if(strcmp(input,"exit 0")==0) return 0;
     	  input[strlen(input)-1]='\0';
+	  if(strcmp(input,"exit 0")==0) exit(0);
 	  printf("%s: command not found\n",input);
   }
   return 0;
