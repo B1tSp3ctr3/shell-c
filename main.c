@@ -14,10 +14,7 @@ int main() {
 	  if(strcmp(input,"exit 0")==0) exit(0);
 
 	  if(strncmp(input,"echo",strlen("echo"))==0){
-	  	for(int i=5;i<strlen(input);i++){
-			putchar(input[i]);
-		}
-		printf("\n");
+		printf("%s\n",input+5);
 	  }
 	  else printf("%s: command not found\n",input);
   }
