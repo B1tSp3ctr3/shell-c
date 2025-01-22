@@ -24,7 +24,7 @@ int main()
     {
       char *arguments = input + 5;
       int found = 0;
-      for (int i = 0; i < 3; i++)
+      for (int i = 0; i < sizeof(builtins)/20; i++)
       {
         if (strcmp(builtins[i], arguments) == 0)
         {
