@@ -19,8 +19,16 @@ int main()
     char *path = getenv("PATH");
     input[strlen(input) - 1] = '\0';
     // exit command
-    if (strcmp(input, "exit 0") == 0)
+    if (strncmp(input, "exit ", strlen("exit ")) == 0)
+    {
+      char *arguments = input + 5;
+      int status = atoi(arguments);
+      exit(status);
+    }
+    else if (strcmp(input, "exit") == 0)
+    {
       exit(0);
+    }
     // type command
     if (strncmp(input, "type ", strlen("type ")) == 0)
     {
@@ -37,22 +45,26 @@ int main()
       }
       if (found == 0)
       {
-        char *directory = strktok(path, ":");
+        char *directory = strtok(path, ":");
         while (directory != NULL)
         {
           char *command = malloc(strlen(directory) + strlen(arguments) + 2);
           strcpy(command, directory);
           strcat(command, "/");
           strcat(command, arguments);
-          if (access(arguments, F_OK) == 0)
+          if (access(command, F_OK) == 0)
           {
             printf("%s is %s\n", arguments, command);
             found = 1;
+            free(command);
             break;
           }
           directory = strtok(NULL, ":");
         }
-        printf("%s: not found\n", input + 5);
+      }
+      if (found == 0)
+      {
+        printf("%s: command not found\n", arguments);
       }
     }
     // echo command
